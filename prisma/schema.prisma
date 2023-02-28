@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type QuemSouTextos {
+  conteudo String
+}
+
+model atividade {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  descricao String
+  nome      String
+  urlIcone  String
+}
+
+model cursos {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  empresa String
+  nome    String
+  ordem   BigInt @unique
+  url     String
+}
+
+model escolaridade {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  anoFormacao BigInt
+  descricao   String
+  instituicao String
+  titulo      String
+}
+
+model experiencias {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  atividades String
+  empresa    String
+  fim        String
+  inicio     String
+  ordem      BigInt @unique
+  vaga       String
+}
+
+model perfil {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  conteudo String
+  tipo     String
+}
+
+model portfolio {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  ordem  BigInt @unique
+  tag    String
+  titulo String
+  url    String
+}
+
+model quemSou {
+  id     String          @id @default(auto()) @map("_id") @db.ObjectId
+  textos QuemSouTextos[]
+  titulo String
+}
