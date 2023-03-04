@@ -1,23 +1,26 @@
 import Link from "next/link";
 import Image from "next/image";
+import { perfil } from "@prisma/client";
+import useSWR from "swr";
+import { fetcher } from "@/utils/data";
+import { motion } from 'framer-motion';
 
-interface INavbar {
-    nome?:string,
-    imagem?:string
-    children?:React.ReactNode
-}
 
-export default function Navbar({nome,imagem}:INavbar) {
+export default function Navbar() {
+    const { data, error, isLoading } = useSWR<perfil[]>('/api/getPerfil', fetcher);
+
+    if (error) return <ErrorPerfil status={error} />
+    if (isLoading) return <ErrorPerfil status="..." />
     return (
         <aside className="bg-gray-800 text-white fixed p-4 top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
             <div className="border-solid border-b-2 border-white py-3 mb-3">
-                <Image 
-                src="https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" 
-                alt="Imagem de Profile"
-                width={500}
-                height={500}
+                <Image
+                    src="https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                    alt="Imagem de Profile"
+                    width={500}
+                    height={500}
                 />
-                <h2>Nome e Sobrenome</h2>
+                <h2>{data![0]?.conteudo}</h2>
             </div>
             <ul>
                 <li>
@@ -35,7 +38,37 @@ export default function Navbar({nome,imagem}:INavbar) {
                 <li>
                     <Link href={'./contato'}>Contato</Link>
                 </li>
+                
             </ul>
         </aside>
+    )
+}
+
+const ErrorPerfil = ({ status }: { status: string }) => {
+    return (
+        <aside className="bg-gray-800 text-white fixed p-4 top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
+            <div className="border-solid border-b-2 border-white py-3 mb-3">
+                <Image
+                    src="https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                    alt="Imagem de Profile"
+                    width={500}
+                    height={500}
+                />
+                <h2>{status}</h2>
+            </div>
+            <ul >
+                {
+                    Array.from({length: 5}, (v, k) => k).map((ele, index) => (
+                        <li key={index} className="w-full h-4 overflow-hidden rounded-lx relative py-3">
+                            <motion.div
+                            transition={{repeat:Infinity,duration:0.8}}
+                                animate={{x:["-90%","190%"]}}
+                                className="h-4 absolute w-32 bg-gradient-to-r from-transparent via-white to-transparent"
+                            />
+                        </li>
+                    ))}
+            </ul>
+        </aside>
+
     )
 }
