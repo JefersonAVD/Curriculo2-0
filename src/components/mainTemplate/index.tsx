@@ -14,9 +14,9 @@ type TShow = {
 
 export default function MainTemplate({ children, hidden, show }: { children: React.ReactNode, hidden: THidden, show: TShow }) {
     return (
-        <main className='overflow-hidden p-10 sm:h-screen'>
+        <main className='overflow-hidden p-10'>
             <motion.div
-                className="sm:ml-64 relative  bg-[#00000020] overflow-x-hidden p-10 h-full rounded-lg"
+                className="sm:ml-64 backdrop-blur-sm relative bg-[#00000035] overflow-x-hidden p-10 rounded-lg"
                 initial="hidden"
                 animate='show'
                 exit='hidden'
@@ -27,7 +27,7 @@ export default function MainTemplate({ children, hidden, show }: { children: Rea
             >
                 <div className='absolute border-color-red border-solid border-black border-l-[2px] border-t-[2px] z-10 w-[100px] h-[100px] top-4 left-4 rounded-tl-xl'></div>
                 {children}
-                <div className='absolute border-color-red border-solid border-black border-r-[2px] border-b-[2px] z-10 w-[100px] h-[100px] bottom-4 right-4 rounded-br-xl'></div>
+                <div className='absolute border-color-red border-solid border-black border-r-[2px] border-b-[2px] z-10 w-[100px] h-[100px] bottom-[10px] right-[10px] rounded-br-xl'></div>
             </motion.div>
         </main>
 

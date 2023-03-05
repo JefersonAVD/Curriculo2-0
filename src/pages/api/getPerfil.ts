@@ -1,16 +1,11 @@
+import { rebuildData, rebuildFun } from '@/utils/functions';
 import { getPerfil } from '@/utils/prisma';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { perfil } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-type Data = {
-  name: string
-}
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<perfil[]>
+  res: NextApiResponse<rebuildData>
 ) {
-    const perfil = await getPerfil();
-    res.status(200).json(perfil)
+    res.status(200).json( await rebuildFun(getPerfil()))
 }

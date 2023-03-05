@@ -1,18 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import { perfil } from "@prisma/client";
 import useSWR from "swr";
 import { fetcher } from "@/utils/data";
 import { motion } from 'framer-motion';
 
 
 export default function Navbar() {
-    const { data, error, isLoading } = useSWR<perfil[]>('/api/getPerfil', fetcher);
-
+    const { data, error, isLoading } = useSWR('/api/getPerfil', fetcher);
+    console.log(data)
     if (error) return <ErrorPerfil status={error} />
     if (isLoading) return <ErrorPerfil status="..." />
     return (
-        <aside className="bg-gray-800 text-white fixed p-4 top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
+        <aside className="bg-gray-800 overflow-y-scroll text-white fixed p-4 top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
             <div className="border-solid border-b-2 border-white py-3 mb-3">
                 <Image
                     src="https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
@@ -20,7 +19,8 @@ export default function Navbar() {
                     width={500}
                     height={500}
                 />
-                <h2>{data![0]?.conteudo}</h2>
+                <h2 className="text-3xl my-2">{data.nome.conteudo}</h2>
+                <p>{data.profissao.conteudo}</p>
             </div>
             <ul>
                 <li>
@@ -38,7 +38,7 @@ export default function Navbar() {
                 <li>
                     <Link href={'./contato'}>Contato</Link>
                 </li>
-                
+
             </ul>
         </aside>
     )
@@ -58,11 +58,11 @@ const ErrorPerfil = ({ status }: { status: string }) => {
             </div>
             <ul >
                 {
-                    Array.from({length: 5}, (v, k) => k).map((ele, index) => (
+                    Array.from({ length: 5 }, (v, k) => k).map((ele, index) => (
                         <li key={index} className="w-full h-4 overflow-hidden rounded-lx relative py-3">
                             <motion.div
-                            transition={{repeat:Infinity,duration:0.8}}
-                                animate={{x:["-90%","190%"]}}
+                                transition={{ repeat: Infinity, duration: 0.8 }}
+                                animate={{ x: ["-90%", "190%"] }}
                                 className="h-4 absolute w-32 bg-gradient-to-r from-transparent via-white to-transparent"
                             />
                         </li>

@@ -1,13 +1,15 @@
 'use client'
 import MainTemplate from '@/components/mainTemplate';
+import useSWR from 'swr';
 
 export default function Resumo() {
+
     return (
         <MainTemplate
-            show={{ opacity: 1, translateX: 0 }}
             hidden={{ opacity: 0, translateX: 300 }}
+            show={{ opacity: 1, translateX: 0 }}
         >
-            <h1>Resumo</h1>
-        </MainTemplate>
+
+        </MainTemplate >
     )
 }
