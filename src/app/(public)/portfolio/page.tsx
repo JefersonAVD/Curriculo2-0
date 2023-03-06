@@ -1,13 +1,7 @@
-'use client'
-import MainTemplate from '@/components/mainTemplate';
+import PagePortfolio from "@/components/routes/portfolio";
+import getCollections from "@/utils/prisma";
 
-export default function Portfolio() {
-    return (
-        <MainTemplate
-            show={{ opacity: 1, translateY: 0 }}
-            hidden={{ opacity: 0, translateY: -300 }}
-        >
-            <h1>Portfólio</h1>
-        </MainTemplate>
-    )
+export default async function Portfolio() {
+    const data = await getCollections(['portfolio'])
+    return <PagePortfolio data={data} />
 }
