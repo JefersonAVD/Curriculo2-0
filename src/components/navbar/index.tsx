@@ -7,11 +7,10 @@ import { motion } from 'framer-motion';
 
 export default function Navbar() {
     const { data, error, isLoading } = useSWR('/api/getPerfil', fetcher);
-    console.log(data)
     if (error) return <ErrorPerfil status={error} />
     if (isLoading) return <ErrorPerfil status="..." />
     return (
-        <aside className="bg-gray-800 overflow-y-scroll text-white fixed p-4 top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
+        <aside className="bg-gray-800 overflow-y-scroll text-white fixed p-4 top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0">
             <div className="border-solid border-b-2 border-white py-3 mb-3">
                 <Image
                     src="https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"

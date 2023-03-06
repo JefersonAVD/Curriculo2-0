@@ -5,7 +5,7 @@ import '../globals.css'
 import gif from '@/assets/lottieFiles/Comp 1.json';
 import { AnimatePresence } from 'framer-motion';
 
-export default function RootLayout({ children, }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
       <head />

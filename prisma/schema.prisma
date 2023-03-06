@@ -22,13 +22,13 @@ model cursos {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   empresa String
   nome    String
-  ordem   BigInt @unique
+  ordem   Int @unique
   url     String
 }
 
 model escolaridade {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
-  anoFormacao BigInt
+  anoFormacao Int
   descricao   String
   instituicao String
   titulo      String
@@ -40,7 +40,7 @@ model experiencias {
   empresa    String
   fim        String
   inicio     String
-  ordem      BigInt @unique
+  ordem      Int @unique
   vaga       String
 }
 
@@ -52,7 +52,7 @@ model perfil {
 
 model portfolio {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
-  ordem  BigInt @unique
+  ordem  Int @unique
   tag    String
   titulo String
   url    String

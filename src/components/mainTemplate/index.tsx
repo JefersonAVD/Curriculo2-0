@@ -16,7 +16,7 @@ export default function MainTemplate({ children, hidden, show }: { children: Rea
     return (
         <main className='overflow-hidden p-10'>
             <motion.div
-                className="sm:ml-64 backdrop-blur-sm relative bg-[#00000035] overflow-x-hidden p-10 rounded-lg"
+                className="lg:ml-64 backdrop-blur-sm relative bg-[#00000020] overflow-x-hidden p-10 rounded-lg"
                 initial="hidden"
                 animate='show'
                 exit='hidden'
